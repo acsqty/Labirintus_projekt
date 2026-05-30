@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("Palyatervezo")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("Labirintus_jatek")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c97a4590996692624e3044d4daa6879923ea6188")]
-[assembly: System.Reflection.AssemblyProductAttribute("Palyatervezo")]
-[assembly: System.Reflection.AssemblyTitleAttribute("Palyatervezo")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6a3ff3023ed015c2a91bf6f87887190594b8705e")]
+[assembly: System.Reflection.AssemblyProductAttribute("Labirintus_jatek")]
+[assembly: System.Reflection.AssemblyTitleAttribute("Labirintus_jatek")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 [assembly: System.Runtime.Versioning.TargetPlatformAttribute("Windows7.0")]
 [assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows7.0")]
