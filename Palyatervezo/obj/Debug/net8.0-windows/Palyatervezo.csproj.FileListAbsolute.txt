@@ -57,3 +57,23 @@ D:\2024-25 tanév prog\labirintus_projekt\jatek2\Palyatervezo\obj\Debug\net8.0-w
 D:\2024-25 tanév prog\labirintus_projekt\jatek2\Palyatervezo\obj\Debug\net8.0-windows\Palyatervezo.pdb
 D:\2024-25 tanév prog\labirintus_projekt\jatek2\Palyatervezo\obj\Debug\net8.0-windows\Palyatervezo.genruntimeconfig.cache
 D:\2024-25 tanév prog\labirintus_projekt\jatek2\Palyatervezo\obj\Debug\net8.0-windows\ref\Palyatervezo.dll
+C:\Users\batiz\OneDrive\Dokumentumok\sulis\hagymix\evvegeeletvege\Palyatervezo\Palyatervezo\bin\Debug\net8.0-windows\Palyatervezo.exe
+C:\Users\batiz\OneDrive\Dokumentumok\sulis\hagymix\evvegeeletvege\Palyatervezo\Palyatervezo\bin\Debug\net8.0-windows\Palyatervezo.deps.json
+C:\Users\batiz\OneDrive\Dokumentumok\sulis\hagymix\evvegeeletvege\Palyatervezo\Palyatervezo\bin\Debug\net8.0-windows\Palyatervezo.runtimeconfig.json
+C:\Users\batiz\OneDrive\Dokumentumok\sulis\hagymix\evvegeeletvege\Palyatervezo\Palyatervezo\bin\Debug\net8.0-windows\Palyatervezo.dll
+C:\Users\batiz\OneDrive\Dokumentumok\sulis\hagymix\evvegeeletvege\Palyatervezo\Palyatervezo\bin\Debug\net8.0-windows\Palyatervezo.pdb
+C:\Users\batiz\OneDrive\Dokumentumok\sulis\hagymix\evvegeeletvege\Palyatervezo\Palyatervezo\obj\Debug\net8.0-windows\MainWindow.baml
+C:\Users\batiz\OneDrive\Dokumentumok\sulis\hagymix\evvegeeletvege\Palyatervezo\Palyatervezo\obj\Debug\net8.0-windows\MainWindow.g.cs
+C:\Users\batiz\OneDrive\Dokumentumok\sulis\hagymix\evvegeeletvege\Palyatervezo\Palyatervezo\obj\Debug\net8.0-windows\App.g.cs
+C:\Users\batiz\OneDrive\Dokumentumok\sulis\hagymix\evvegeeletvege\Palyatervezo\Palyatervezo\obj\Debug\net8.0-windows\Palyatervezo_MarkupCompile.cache
+C:\Users\batiz\OneDrive\Dokumentumok\sulis\hagymix\evvegeeletvege\Palyatervezo\Palyatervezo\obj\Debug\net8.0-windows\Palyatervezo.g.resources
+C:\Users\batiz\OneDrive\Dokumentumok\sulis\hagymix\evvegeeletvege\Palyatervezo\Palyatervezo\obj\Debug\net8.0-windows\Palyatervezo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\batiz\OneDrive\Dokumentumok\sulis\hagymix\evvegeeletvege\Palyatervezo\Palyatervezo\obj\Debug\net8.0-windows\Palyatervezo.AssemblyInfoInputs.cache
+C:\Users\batiz\OneDrive\Dokumentumok\sulis\hagymix\evvegeeletvege\Palyatervezo\Palyatervezo\obj\Debug\net8.0-windows\Palyatervezo.AssemblyInfo.cs
+C:\Users\batiz\OneDrive\Dokumentumok\sulis\hagymix\evvegeeletvege\Palyatervezo\Palyatervezo\obj\Debug\net8.0-windows\Palyatervezo.csproj.CoreCompileInputs.cache
+C:\Users\batiz\OneDrive\Dokumentumok\sulis\hagymix\evvegeeletvege\Palyatervezo\Palyatervezo\obj\Debug\net8.0-windows\Palyatervezo.sourcelink.json
+C:\Users\batiz\OneDrive\Dokumentumok\sulis\hagymix\evvegeeletvege\Palyatervezo\Palyatervezo\obj\Debug\net8.0-windows\Palyatervezo.dll
+C:\Users\batiz\OneDrive\Dokumentumok\sulis\hagymix\evvegeeletvege\Palyatervezo\Palyatervezo\obj\Debug\net8.0-windows\refint\Palyatervezo.dll
+C:\Users\batiz\OneDrive\Dokumentumok\sulis\hagymix\evvegeeletvege\Palyatervezo\Palyatervezo\obj\Debug\net8.0-windows\Palyatervezo.pdb
+C:\Users\batiz\OneDrive\Dokumentumok\sulis\hagymix\evvegeeletvege\Palyatervezo\Palyatervezo\obj\Debug\net8.0-windows\Palyatervezo.genruntimeconfig.cache
+C:\Users\batiz\OneDrive\Dokumentumok\sulis\hagymix\evvegeeletvege\Palyatervezo\Palyatervezo\obj\Debug\net8.0-windows\ref\Palyatervezo.dll

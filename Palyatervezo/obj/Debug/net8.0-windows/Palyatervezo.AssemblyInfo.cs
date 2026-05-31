@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Palyatervezo")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c97a4590996692624e3044d4daa6879923ea6188")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c5e35c26de7daea4f41c8eb4e50010b1f5a5405e")]
 [assembly: System.Reflection.AssemblyProductAttribute("Palyatervezo")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Palyatervezo")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
