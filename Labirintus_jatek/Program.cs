@@ -183,7 +183,7 @@ namespace Labirintus_jatek
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(magyar ? "\n  ⏰ VESZTETTÉL!" : "\n  ⏰ YOU LOST!");
                     Console.ResetColor();
-                    Console.ReadKey();
+                    System.Threading.Thread.Sleep(5000);
                     return;
                 }
 
@@ -246,7 +246,7 @@ namespace Labirintus_jatek
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine(magyar ? "\n  ⏰ VESZTETTÉL!" : "\n  ⏰ YOU LOST!");
                             Console.ResetColor();
-                            Console.ReadKey();
+                            System.Threading.Thread.Sleep(5000);
                             return;
                         }
                         if ((DateTime.Now - startWait).TotalMilliseconds >= refreshMs)
@@ -278,7 +278,7 @@ namespace Labirintus_jatek
                         idoInditva = true;
                     }
                     if (Mozgas(bill.Key, osszesTerem))
-                        return; // ha true, akkor vissza kell térni a menübe
+                        return;
                 }
             }
         }
@@ -354,7 +354,6 @@ namespace Labirintus_jatek
             };
         }
 
-        // Visszatér: true ha menübe kell lépni (nyert vagy nem teljesítve)
         static bool Mozgas(ConsoleKey bill, int osszesTerem)
         {
             int x = jatekosX, y = jatekosY;
