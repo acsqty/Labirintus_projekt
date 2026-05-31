@@ -15,7 +15,7 @@ namespace Labirintus_jatek
         static bool[,] latogatott;
         static int jatekosX, jatekosY, hatralevIdo = -1;
         static HashSet<string> felfedezettTermek = new HashSet<string>();
-        static string terkepNev;
+        static string terkepNev, terkepTeljesUtvonal;
         static bool magyar = true, fedettMod = false;
         static Stopwatch stopwatch;
 
@@ -59,9 +59,14 @@ namespace Labirintus_jatek
         static void UjJatek()
         {
             Console.Clear();
-            using (OpenFileDialog dialog = new OpenFileDialog { Filter = "*.txt|*.txt", InitialDirectory = Environment.CurrentDirectory })
+            using (OpenFileDialog dialog = new OpenFileDialog 
+            { 
+                Filter = "Térkép fájlok|*.txt",
+                InitialDirectory = Environment.CurrentDirectory 
+            })
             {
                 if (dialog.ShowDialog() != DialogResult.OK) return;
+                terkepTeljesUtvonal = dialog.FileName;
                 terkepNev = Path.GetFileNameWithoutExtension(dialog.FileName);
                 TerkepBetolt(dialog.FileName);
             }
@@ -69,7 +74,6 @@ namespace Labirintus_jatek
             Console.Clear();
             Console.WriteLine(magyar ? "✓ Térkép betöltve!\n" : "✓ Map loaded!\n");
 
-            // KÖTELEZŐ METÓDUSOK KIÍRÁSA
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(magyar ? $"  Termek száma: {GetRoomNumber(terkep)}" : $"  Rooms: {GetRoomNumber(terkep)}");
             Console.WriteLine(magyar ? $"  Bejáratok száma: {GetSuitableEntrance(terkep)}" : $"  Entrances: {GetSuitableEntrance(terkep)}");
@@ -144,14 +148,12 @@ namespace Labirintus_jatek
                     return;
                 }
 
-                Console.SetCursorPosition(0, 0);
+                Console.Clear();
                 Megjelenit();
 
-                Console.SetCursorPosition(0, terkep.GetLength(0) + 2);
                 Console.WriteLine(new string('═', 119));
-
                 string ido = hatralevIdo > 0 ? $"{hatralevIdo - (int)stopwatch.Elapsed.TotalSeconds}s" : "-";
-                Console.WriteLine($"  [{jatekosX},{jatekosY}] | {felfedezettTermek.Count}/{osszesTerem} | {ido}");
+                Console.WriteLine($"  Pozíció: [{jatekosX},{jatekosY}] | Termek: {felfedezettTermek.Count}/{osszesTerem} | Idő: {ido}");
 
                 if (terkep[jatekosX, jatekosY] == Terem && felfedezettTermek.Add($"{jatekosX}:{jatekosY}"))
                 {
@@ -159,20 +161,33 @@ namespace Labirintus_jatek
                     Console.WriteLine($"\n  ★ TEREM! ({felfedezettTermek.Count}/{osszesTerem})");
                     Console.ResetColor();
                     Console.ReadKey(true);
+                    continue;
                 }
 
-                Iranyok();
-                Console.WriteLine("\n  [WASD] | [M]Mentés [Q]Kilépés");
+                Console.Write("\n  ");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("Irányok: ");
+                var iranyok = new List<string>();
+                if (MehetE(jatekosX - 1, jatekosY, 'N')) iranyok.Add("↑Fel");
+                if (MehetE(jatekosX, jatekosY - 1, 'W')) iranyok.Add("←Bal");
+                if (MehetE(jatekosX + 1, jatekosY, 'S')) iranyok.Add("↓Le");
+                if (MehetE(jatekosX, jatekosY + 1, 'E')) iranyok.Add("→Jobb");
+                Console.WriteLine(iranyok.Count > 0 ? string.Join(" ", iranyok) : "-");
+                Console.ResetColor();
+
+                Console.WriteLine("\n  [WASD] mozgás | [M] Mentés | [Q] Kilépés");
 
                 var bill = Console.ReadKey(true);
                 if (bill.Key == ConsoleKey.Q)
                 {
                     Console.Write(magyar ? "\n  Kilépés? (I/N): " : "\n  Quit? (Y/N): ");
-                    var valasz = Console.ReadKey(true);
-                    if (valasz.Key == ConsoleKey.I || valasz.Key == ConsoleKey.Y) return;
+                    Console.CursorVisible = true;
+                    var valasz = Console.ReadLine()?.ToUpper();
+                    Console.CursorVisible = false;
+                    if (valasz == "I" || valasz == "Y") return;
                 }
                 else if (bill.Key == ConsoleKey.M) Mentes();
-                else Mozgas(bill.Key);
+                else Mozgas(bill.Key, osszesTerem);
             }
         }
 
@@ -217,23 +232,6 @@ namespace Labirintus_jatek
             }
         }
 
-        static void Iranyok()
-        {
-            var ir = new List<string>();
-            if (MehetE(jatekosX - 1, jatekosY, 'N')) ir.Add("↑");
-            if (MehetE(jatekosX, jatekosY - 1, 'W')) ir.Add("←");
-            if (MehetE(jatekosX + 1, jatekosY, 'S')) ir.Add("↓");
-            if (MehetE(jatekosX, jatekosY + 1, 'E')) ir.Add("→");
-
-            if (ir.Count > 0)
-            {
-                Console.Write("\n  ");
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write(string.Join(" ", ir));
-                Console.ResetColor();
-            }
-        }
-
         static bool MehetE(int x, int y, char ir)
         {
             if (x < 0 || y < 0 || x >= terkep.GetLength(0) || y >= terkep.GetLength(1)) return false;
@@ -264,7 +262,7 @@ namespace Labirintus_jatek
             };
         }
 
-        static void Mozgas(ConsoleKey bill)
+        static void Mozgas(ConsoleKey bill, int osszesTerem)
         {
             int x = jatekosX, y = jatekosY;
             char ir = '\0';
@@ -291,21 +289,19 @@ namespace Labirintus_jatek
             {
                 if (IranyOk(terkep[jatekosX, jatekosY], ir))
                 {
-                    int osszesTerem = GetRoomNumber(terkep);
-                    Console.SetCursorPosition(0, terkep.GetLength(0) + 8);
+                    Console.WriteLine();
                     if (felfedezettTermek.Count < osszesTerem)
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.Write(magyar ? $"\n  ⚠ Még {osszesTerem - felfedezettTermek.Count} terem! Kilépsz? (I/N): " :
-                            $"\n  ⚠ {osszesTerem - felfedezettTermek.Count} left! Exit? (Y/N): ");
-                        var valasz = Console.ReadKey(true);
-                        if (valasz.Key != ConsoleKey.I && valasz.Key != ConsoleKey.Y)
-                        {
-                            Console.ResetColor();
-                            return;
-                        }
+                        Console.CursorVisible = true;
+                        Console.Write(magyar ? $"  ⚠ Még {osszesTerem - felfedezettTermek.Count} terem! Kilépsz? (I/N): " :
+                            $"  ⚠ {osszesTerem - felfedezettTermek.Count} left! Exit? (Y/N): ");
+                        var valasz = Console.ReadLine()?.ToUpper();
+                        Console.CursorVisible = false;
+                        Console.ResetColor();
+                        if (valasz != "I" && valasz != "Y") return;
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine(magyar ? "\n\n  Nem teljesítve!" : "\n\n  Not completed!");
+                        Console.WriteLine(magyar ? "\n  Nem teljesítve!" : "\n  Not completed!");
                     }
                     else
                     {
@@ -314,6 +310,7 @@ namespace Labirintus_jatek
                     }
                     Console.ResetColor();
                     Console.ReadKey();
+                    Environment.Exit(0);
                 }
                 return;
             }
@@ -332,7 +329,8 @@ namespace Labirintus_jatek
             {
                 using (var w = new StreamWriter(terkepNev + ".sav"))
                 {
-                    w.WriteLine(terkepNev + ".txt");
+                    // Teljes útvonal mentése
+                    w.WriteLine(terkepTeljesUtvonal);
                     w.WriteLine(fedettMod);
                     w.WriteLine(jatekosX);
                     w.WriteLine(jatekosY);
@@ -344,10 +342,7 @@ namespace Labirintus_jatek
                             for (int j = 0; j < latogatott.GetLength(1); j++)
                                 if (latogatott[i, j]) w.WriteLine($"{i}:{j}");
                 }
-                Console.SetCursorPosition(0, terkep.GetLength(0) + 8);
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\n  ✓ Mentve!");
-                Console.ResetColor();
+                Console.WriteLine(magyar ? "\n  ✓ Mentve!" : "\n  ✓ Saved!");
                 Console.ReadKey(true);
             }
             catch { }
@@ -355,25 +350,50 @@ namespace Labirintus_jatek
 
         static void Betoltes()
         {
-            using (OpenFileDialog dialog = new OpenFileDialog { Filter = "*.sav|*.sav" })
+            using (OpenFileDialog dialog = new OpenFileDialog 
+            { 
+                Filter = "Mentés fájlok|*.sav",
+                InitialDirectory = Environment.CurrentDirectory 
+            })
             {
                 if (dialog.ShowDialog() != DialogResult.OK) return;
                 try
                 {
                     var s = File.ReadAllLines(dialog.FileName);
-                    TerkepBetolt(Path.Combine(Path.GetDirectoryName(dialog.FileName), s[0]));
-                    terkepNev = Path.GetFileNameWithoutExtension(s[0]);
+                    
+                    // Térkép teljes útvonal beolvasása
+                    terkepTeljesUtvonal = s[0];
+                    
+                    if (!File.Exists(terkepTeljesUtvonal))
+                    {
+                        Console.WriteLine(magyar ? $"\nHiba: Nem található a térkép fájl!\n{terkepTeljesUtvonal}" : 
+                            $"\nError: Map file not found!\n{terkepTeljesUtvonal}");
+                        Console.ReadKey();
+                        return;
+                    }
+
+                    // Térkép betöltése
+                    TerkepBetolt(terkepTeljesUtvonal);
+                    terkepNev = Path.GetFileNameWithoutExtension(terkepTeljesUtvonal);
+                    
+                    // Játék állapot visszaállítása
                     fedettMod = bool.Parse(s[1]);
                     jatekosX = int.Parse(s[2]);
                     jatekosY = int.Parse(s[3]);
                     felfedezettTermek = new HashSet<string>(s[4].Split(';').Where(x => !string.IsNullOrEmpty(x)));
-                    hatralevIdo = int.Parse(s[5]);
+                    
+                    // Idő kezelése
+                    int eredetiIdo = int.Parse(s[5]);
+                    hatralevIdo = eredetiIdo;
+                    
                     if (hatralevIdo > 0 && s.Length > 6)
                     {
+                        int elteltIdo = int.Parse(s[6]);
+                        hatralevIdo = eredetiIdo - elteltIdo;
                         stopwatch = Stopwatch.StartNew();
-                        int eltelt = int.Parse(s[6]);
-                        hatralevIdo -= eltelt;
                     }
+                    
+                    // Látogatott mezők visszaállítása
                     if (fedettMod)
                     {
                         latogatott = new bool[terkep.GetLength(0), terkep.GetLength(1)];
@@ -381,23 +401,23 @@ namespace Labirintus_jatek
                         for (int i = startLine; i < s.Length; i++)
                         {
                             var r = s[i].Split(':');
-                            if (r.Length == 2)
-                                latogatott[int.Parse(r[0]), int.Parse(r[1])] = true;
+                            if (r.Length == 2 && int.TryParse(r[0], out int row) && int.TryParse(r[1], out int col))
+                                latogatott[row, col] = true;
                         }
                     }
+                    
                     Console.WriteLine("\n✓ Betöltve!");
                     Console.ReadKey();
                     Jatek();
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Hiba: {ex.Message}");
+                    Console.WriteLine(magyar ? $"\nHiba: {ex.Message}" : $"\nError: {ex.Message}");
                     Console.ReadKey();
                 }
             }
         }
 
-        // ===== KÖTELEZŐ METÓDUSOK =====
         static int GetRoomNumber(char[,] map)
         {
             int db = 0;
