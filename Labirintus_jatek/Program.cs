@@ -91,8 +91,8 @@ namespace Labirintus_jatek
             if (Console.ReadLine() == "1")
             {
                 Console.WriteLine(magyar
-                    ? "Válassz időtartamot:\n  1 - 60 másodperc\n  2 - 120 másodperc\n  3 - 180 másodperc"
-                    : "Choose duration:\n  1 - 60 seconds\n  2 - 120 seconds\n  3 - 180 seconds");
+                    ? "Válassz időtartamot:\n  1 - 60 másodperc\n  2 - 120 másodperc\n  3 - 180 másodperc\n  4 - Egyéni időtartam"
+                    : "Choose duration:\n  1 - 60 seconds\n  2 - 120 seconds\n  3 - 180 seconds\n  4 - Custom duration");
                 Console.Write(magyar ? "Opció: " : "Option: ");
                 string valasz = Console.ReadLine();
                 int ido = 0;
@@ -101,6 +101,21 @@ namespace Labirintus_jatek
                     case "1": ido = 60; break;
                     case "2": ido = 120; break;
                     case "3": ido = 180; break;
+                    case "4":
+                        Console.Write(magyar ? "Add meg az időt másodpercben: " : "Enter time in seconds: ");
+                        Console.CursorVisible = true;
+                        string customInput = Console.ReadLine();
+                        Console.CursorVisible = false;
+                        if (int.TryParse(customInput, out int customTime) && customTime > 0)
+                        {
+                            ido = customTime;
+                        }
+                        else
+                        {
+                            Console.WriteLine(magyar ? "Érvénytelen érték, 60 másodperc lesz beállítva." : "Invalid value, 60 seconds will be set.");
+                            ido = 60;
+                        }
+                        break;
                     default:
                         Console.WriteLine(magyar ? "Érvénytelen opció, 60 másodperc lesz beállítva." : "Invalid option, 60 seconds will be set.");
                         ido = 60;
@@ -424,7 +439,7 @@ namespace Labirintus_jatek
                                 if (latogatott[i, j]) w.WriteLine($"{i}:{j}");
                 }
                 Console.WriteLine(magyar ? "\n  ✓ Mentve!" : "\n  ✓ Saved!");
-                Console.ReadKey(true);
+                System.Threading.Thread.Sleep(2000);
             }
             catch { }
         }
