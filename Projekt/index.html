@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Labirintus Játék Dokumentáció</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    
+<div id="langModal" class="modal">
+    <div class="modal-box">
+        <h2>Válassz nyelvet / Choose language</h2>
+
+        <button onclick="setLang('hu')">🇭🇺 Magyar</button>
+        <button onclick="setLang('en')">🇬🇧 English</button>
+    </div>
+</div>
+<header>
+    <h1> <span data-hu="Labirintus Játék" data-en="Labyrinth Game"></span></h1>
+
+    <p data-hu="Projekt dokumentáció " data-en="Project documentation">
+        
+    </p>
+
+    <div class="lang-switch">
+        <button onclick="setLang('hu')">🇭🇺 Magyar</button>
+        <button onclick="setLang('en')">🇬🇧 English</button>
+    </div>
+</header>
+
+<nav>
+    <a href="#projekt" data-hu="Projekt" data-en="Project"></a>
+    <a href="#jatek" data-hu="Játék" data-en="Game"></a>
+    <a href="#palya" data-hu="Pálya" data-en="Map"></a>
+    <a href="#metodusok" data-hu="Metódusok" data-en="Methods"></a>
+    <a href="#extrak" data-hu="Extrák" data-en="Extras"></a>
+    <a href="#csapat" data-hu="Csapat" data-en="Team"></a>
+</nav>
+
+
+<section id="projekt">
+    <h2 data-hu=" Projekt bemutatása" data-en=" Project overview"></h2>
+
+    <div class="box">
+        <span data-hu="
+        A Labirintus játék egy C# alapú konzolos alkalmazás, amely egy klasszikus labirintus bejárási feladatot valósít meg.
+        A pálya speciális karakterekből épül fel, amelyek nemcsak a falakat, hanem a mozgási lehetőségeket is meghatározzák.
+
+        A játékos célja a kincses termek felfedezése, majd a kijutás a labirintusból.
+        A projekt több funkciót tartalmaz, mint mentés, betöltés, nyelvváltás és különböző játékmódok.
+        "
+        data-en="
+        The Labyrinth game is a C# console application implementing a classic maze traversal task.
+        The map is built from special characters defining both walls and movement rules.
+
+        The player’s goal is to discover treasure rooms and escape the maze.
+        The project includes saving, loading, language switching, and multiple game modes.
+        ">
+        
+        </span>
+    </div>
+</section>
+
+
+<section id="jatek">
+    <h2 data-hu=" Játékmenet" data-en=" Gameplay"></h2>
+
+    <div class="box">
+        <span data-hu="
+        A játékos WASD billentyűkkel irányítja a karaktert egy labirintusban.
+        Minden lépés előtt a program ellenőrzi, hogy az adott irányban lehetséges-e a mozgás.
+
+        A cél az összes kincses terem felfedezése, majd a kijutás a pályáról.
+        A játék folyamatosan visszajelzést ad a játékos helyzetéről és a lehetséges irányokról.
+
+        A játék tartalmaz időkorlátos módot és fedett (fog of war) játékmódot is.
+        "
+        data-en="
+        The player uses WASD keys to navigate through the maze.
+        Before each movement, the system checks whether the move is possible.
+
+        The goal is to discover all treasure rooms and exit the maze.
+        The game continuously provides feedback about position and possible directions.
+
+        It also includes timed mode and fog-of-war mode.
+        ">
+        
+        </span>
+    </div>
+</section>
+
+
+<section id="palya">
+    <h2 data-hu=" Pálya felépítése" data-en=" Map structure"></h2>
+
+    <div class="box">
+       <span data-hu="A pálya egy szöveges fájlban van tárolva karakterek segítségével."
+              data-en="The map is stored in a text file using characters.">
+        </span>
+
+        <br><br>
+
+        <span data-hu=". = üres terület"
+              data-en=". = empty space"></span>
+        <br>
+
+        <span data-hu="█ = kincses terem"
+              data-en="█ = treasure room"></span>
+        <br>
+
+        <span data-hu="╬ ═ ╦ ╩ ║ ╣ ╠ ╗ ╝ ╚ ╔ = járatok"
+              data-en="╬ ═ ╦ ╩ ║ ╣ ╠ ╗ ╝ ╚ ╔ = corridors"></span>
+    </div>
+</section>
+
+
+<section id="metodusok">
+    <h2 data-hu=" Megvalósított metódusok" data-en=" Implemented methods">
+         
+    </h2>
+
+    <div class="box">
+
+        <b>MehetE()</b><br>
+        <span data-hu="Ellenőrzi, hogy a játékos léphet-e az adott mezőre a pálya szabályai szerint."
+              data-en="Checks whether the player can move to a given tile based on map rules."></span>
+        <br><br>
+
+        <b>Mozgas()</b><br>
+        <span data-hu="Kezeli a játékos mozgását WASD billentyűk alapján, és frissíti a pozíciót."
+              data-en="Handles player movement using WASD keys and updates position."></span>
+        <br><br>
+
+        <b>IranyOk()</b><br>
+        <span data-hu="Ellenőrzi, hogy egy járatkarakter engedélyezi-e a mozgást egy adott irányba."
+              data-en="Checks whether a corridor character allows movement in a given direction."></span>
+        <br><br>
+
+        <b>TerkepBetolt()</b><br>
+        <span data-hu="Beolvassa a labirintus térképet szöveges fájlból és létrehozza a pályát."
+              data-en="Loads the maze map from a text file and creates the game board."></span>
+        <br><br>
+
+        <b>Mentes()</b><br>
+        <span data-hu="Elmenti a játék aktuális állapotát .sav fájlba, beleértve a játékos pozícióját és a felfedezett termeket."
+              data-en="Saves the current game state into a .sav file including position and discovered rooms."></span>
+        <br><br>
+
+        <b>Megjelenit()</b><br>
+        <span data-hu="Kirajzolja a teljes labirintust a konzolra, megjelenítve a játékost és a pályát."
+              data-en="Renders the entire maze in the console including player and map."></span>
+
+    </div>
+</section>
+
+
+<section id="extrak">
+    <h2 data-hu=" Extrák" data-en=" Extras"></h2>
+
+    <div class="box">
+
+        <b data-hu="Időkorlátos játékmód" data-en="Time limited game mode"></b><br>
+        <span data-hu="
+        A játékos választhat időkorlátos módot, ahol meghatározott idő áll rendelkezésre a pálya teljesítésére.
+        Ha az idő lejár, a játék automatikusan véget ér, és a játékos veszít.
+        "
+        data-en="
+        The player can choose a timed mode where a limited amount of time is available.
+        If time runs out, the game ends automatically and the player loses.
+        "></span>
+
+        <br><br>
+
+        <b data-hu="Fedett térképes mód (Fog of War)" data-en="Fog of War"></b><br>
+        <span data-hu="
+        Ebben a módban a játékos nem látja a teljes térképet, csak azokat a részeket, ahol már járt.
+        Ez növeli a játék nehézségét és a felfedezés élményét.
+        "
+        data-en="
+        In this mode, the player cannot see the full map, only the areas already visited.
+        This increases difficulty and exploration experience.
+        "></span>
+
+        <br><br>
+
+        <b data-hu="Mentés és visszatöltés" data-en="Save and load system"></b><br>
+        <span data-hu="
+        A játék állapota bármikor elmenthető .sav fájlba, majd később visszatölthető.
+        A mentés tartalmazza a pálya állapotát, a játékos pozícióját és a felfedezett termeket is.
+        "
+        data-en="
+        The game state can be saved into a .sav file and later reloaded.
+        It includes map state, player position, and discovered rooms.
+        "></span>
+
+        <br><br>
+
+        <b data-hu=" Kétnyelvű rendszer" data-en="Bilingual system"></b><br>
+        <span data-hu="
+        A program támogatja a magyar és angol nyelvet, amely futás közben is váltható.
+        Ez segíti a nemzetközi felhasználhatóságot és a jobb érthetőséget.
+        "
+        data-en="
+        The program supports Hungarian and English languages, switchable during runtime.
+        This improves usability and international accessibility.
+        "></span>
+
+    </div>
+</section>
+
+
+<section id="csapat">
+    <h2 data-hu=" Csapat" data-en=" Team"></h2>
+
+    <div class="box">
+        <span data-hu="Batiz Béla Benedek: Játék fejlesztés"
+              data-en="Béla Benedek Batiz: Game development"></span>
+        <br>
+
+        <span data-hu="Ács Attila: Térképszerkesztő"
+              data-en="Attila Ács: Map editor"></span>
+        <br>
+
+        <span data-hu="Zsupos Máté: Dokumentáció"
+              data-en="Máté Zsupos: Documentation"></span>
+    </div>
+</section>
+
+
+
+<script src="script.js"></script>
+</body>
+</html>
